@@ -36,6 +36,10 @@ MANIFEST
 pip-log.txt
 pip-delete-this-directory.txt
 
+# env-files
+.env
+*.env
+
 # Unit test / coverage reports
 htmlcov/
 .tox/
@@ -54,6 +58,9 @@ cover/
 # Translations
 *.mo
 *.pot
+
+# IDE settings
+.vscode/
 
 # Django stuff:
 *.log

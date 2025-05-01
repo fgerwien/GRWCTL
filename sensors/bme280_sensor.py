@@ -1,18 +1,21 @@
+import board
+import busio
+from adafruit_bme280 import basic as adafruit_bme280
 from config import PINConfig
 
 class BME280Sensor:
-    def __init__(self, bus_number=PINConfig.BME280_I2C_ADDRESS, address=PINConfig.BME280_I2C_ADDRESS):
-        import smbus2
-        from bme280 import BME280
-        self.bus = smbus2.SMBus(bus_number)
-        self.bme280 = BME280(i2c_dev=self.bus, address=address)
+    def __init__(self, address=0x76):
+        # Initialize I2C bus and BME280 sensor
+        self.i2c = busio.I2C(board.SCL, board.SDA, frequency=100000)
+        self.address = address
+        self.sensor = adafruit_bme280.Adafruit_BME280_I2C(self.i2c, address=self.address)
 
     def read_data(self):
         try:
-            data = self.bme280.read_compensated_data()
-            temperature = data[0] / 100  # Convert to Celsius
-            pressure = data[1] / 25600  # Convert to hPa
-            humidity = data[2] / 1024  # Convert to percentage
+            # Read temperature, pressure, and humidity
+            temperature = self.sensor.temperature  # Celsius
+            pressure = self.sensor.pressure  # hPa
+            humidity = self.sensor.humidity  # Percentage
             return {
                 'temperature': temperature,
                 'pressure': pressure,

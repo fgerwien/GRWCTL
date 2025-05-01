@@ -1,4 +1,9 @@
-Adafruit-DHT
-smbus2
+adafruit-circuitpython-dht
+adafruit-circuitpython-bme280
 influxdb
-RPi.GPIO
+python-dotenv
+
+#development
+black
+flake8
+isort
