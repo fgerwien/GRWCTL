@@ -1,5 +1,9 @@
 import os
 
+from utils import load_envconfig
+
+load_envconfig()
+
 
 class GRWConfig:
     # General settings
@@ -31,7 +35,7 @@ class PINConfig:
     DHT22_SENSOR2_PIN = int(os.getenv("DHT22_SENSOR2_PIN", 21))
 
     BME280_SENSOR_NAME = os.getenv("BME280_SENSOR_NAME", "BME280 Sensor")
-    BME280_I2C_ADDRESS = int(os.getenv("BME280_I2C_ADDRESS", 0x76))
+    BME280_I2C_ADDRESS = int(os.getenv("BME280_I2C_ADDRESS", 0x76), 16)
 
     MOISTURE_SENSOR_NAME = os.getenv("MOISTURE_SENSOR_NAME", "Moisture Sensor")
     MOISTURE_SENSOR_PIN = int(os.getenv("MOISTURE_SENSOR_PIN", 6))

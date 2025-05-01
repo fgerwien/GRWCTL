@@ -1,7 +1,8 @@
 class MoistureSensor:
-    def __init__(self, pin):
-        self.pin = pin
+    def __init__(self, pin, name):
         # Initialize the moisture sensor here (e.g., GPIO setup)
+        self.pin = pin
+        self.name = name
 
     def read_data(self):
         try:
@@ -15,4 +16,4 @@ class MoistureSensor:
     def _read_moisture(self):
         # Placeholder for actual moisture reading logic
         # This should return the moisture level as a float or int
-        return 0  # Replace with actual reading logic
+        return {"moisture": True}  # Replace with actual reading logic

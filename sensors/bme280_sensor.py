@@ -2,12 +2,11 @@ import board
 import busio
 from adafruit_bme280 import basic as adafruit_bme280
 
-from config import PINConfig
-
 
 class BME280Sensor:
-    def __init__(self, address=0x76):
+    def __init__(self, name, address=0x76):
         # Initialize I2C bus and BME280 sensor
+        self.name = name
         self.i2c = busio.I2C(board.SCL, board.SDA, frequency=100000)
         self.address = address
         self.sensor = adafruit_bme280.Adafruit_BME280_I2C(

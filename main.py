@@ -12,6 +12,7 @@ logger = GRWLogger()
 
 
 def read_sensor(sensor):
+    """Read data from the given sensor and handle errors."""
     try:
         sensor_data = sensor.read_data()
         if "error" in sensor_data:
@@ -28,27 +29,34 @@ def read_sensor(sensor):
 
 def main():
     dht22_sensor1 = DHT22Sensor(
-        pin=PINConfig.DHT22_SENSOR1_PIN
+        pin=PINConfig.DHT22_SENSOR1_PIN, name=PINConfig.DHT22_SENSOR1_NAME
     )  # GPIO pin for first DHT22
     dht22_sensor2 = DHT22Sensor(
-        pin=PINConfig.DHT22_SENSOR2_PIN
+        pin=PINConfig.DHT22_SENSOR2_PIN, name=PINConfig.DHT22_SENSOR2_NAME
     )  # GPIO pin for second DHT22
     bme280_sensor = BME280Sensor(
-        address=PINConfig.BME280_I2C_ADDRESS
+        address=PINConfig.BME280_I2C_ADDRESS, name=PINConfig.BME280_SENSOR_NAME
     )  # I2C address for BME280
     moisture_sensor = MoistureSensor(
-        pin=PINConfig.MOISTURE_SENSOR_PIN
+        pin=PINConfig.MOISTURE_SENSOR_PIN, name=PINConfig.MOISTURE_SENSOR_NAME
     )  # GPIO pin for moisture sensor
+
+    sensor_list = [
+        dht22_sensor1,
+        dht22_sensor2,
+        bme280_sensor,
+        moisture_sensor,
+    ]  # List of all sensors
 
     # influx_writer = InfluxDBWriter()
     logger.log_info("Starting sensor data collection...")
     while True:
         try:
             data = {}
-            data[PINConfig.DHT22_SENSOR1_NAME] = read_sensor(dht22_sensor1)
-            data[PINConfig.DHT22_SENSOR2_NAME] = read_sensor(dht22_sensor2)
-            data[PINConfig.BME280_SENSOR_NAME] = read_sensor(bme280_sensor)
-            data[PINConfig.MOISTURE_SENSOR_NAME] = read_sensor(moisture_sensor)
+            for sensor in sensor_list:
+                sensor_data = read_sensor(sensor)
+                if sensor_data:
+                    data[sensor.name] = sensor_data
 
             # Write data to InfluxDB
             # influx_writer.full_dump(data)
@@ -68,5 +76,4 @@ def main():
 
 
 if __name__ == "__main__":
-    load_envconfig()
     main()

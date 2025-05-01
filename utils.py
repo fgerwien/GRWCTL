@@ -3,6 +3,18 @@ import os
 from dotenv import load_dotenv
 
 
+def load_envconfig():
+    """
+    Load configuration from environment variables or default values.
+    """
+    # Load environment variables from settings.env file
+    envfile = os.path.join(os.path.dirname(__file__), "conf/settings.env")
+    if os.path.exists(envfile) and load_dotenv(dotenv_path=envfile):
+        print(f"Environment variables loaded from {envfile}")
+    else:
+        print("Environment file not found. Using default settings.")
+
+
 def print_config():
     """
     Print the configuration values for debugging purposes.
@@ -16,18 +28,3 @@ def print_config():
     for key, value in PINConfig.__dict__.items():
         if not key.startswith("__"):
             print(f"{key}: {value}")
-
-
-def load_envconfig():
-    """
-    Load configuration from environment variables or default values.
-    """
-    # Load environment variables from settings.env file
-    envfile = os.path.join(os.path.dirname(__file__), "conf/settings.env")
-    if os.path.exists(envfile) and load_dotenv(dotenv_path=envfile):
-        print(f"Environment variables loaded from {envfile}")
-    else:
-        print("Environment file not found. Using default settings.")
-
-    if os.getenv("DEBUG"):
-        print_config()
