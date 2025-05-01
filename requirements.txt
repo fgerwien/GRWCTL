@@ -1,0 +1,4 @@
+Adafruit-DHT
+smbus2
+influxdb
+RPi.GPIO
