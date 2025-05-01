@@ -4,6 +4,7 @@ influxdb
 python-dotenv
 
 #development
+pre-commit
 black
 flake8
 isort
