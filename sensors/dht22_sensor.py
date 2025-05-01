@@ -1,5 +1,6 @@
-import board
 import adafruit_dht
+import board
+
 
 class DHT22Sensor:
     def __init__(self, pin):
@@ -12,12 +13,12 @@ class DHT22Sensor:
             temperature = self.sensor.temperature
             humidity = self.sensor.humidity
             if humidity is not None and temperature is not None:
-                return {'temperature': temperature, 'humidity': humidity}
+                return {"temperature": temperature, "humidity": humidity}
             else:
-                return {'error': f'Failed to read from DHT22 on pin {self.pin}'}
+                return {"error": f"Failed to read from DHT22 on pin {self.pin}"}
         except RuntimeError as e:
             # Handle occasional read errors
-            return {'error': str(e)}
+            return {"error": str(e)}
         except Exception as e:
             # Handle other exceptions
-            return {'error': f'Unexpected error: {str(e)}'}
+            return {"error": f"Unexpected error: {str(e)}"}

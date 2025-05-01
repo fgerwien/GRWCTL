@@ -1,7 +1,9 @@
 import datetime
+
 from influxdb import InfluxDBClient
-from config import GRWConfig
 from urllib3 import Retry
+
+from config import GRWConfig
 
 
 class InfluxDBWriter:
@@ -30,15 +32,11 @@ class InfluxDBWriter:
 
     def write_data(self, measurement, data):
         try:
-            json_body = [
-                {
-                    "measurement": measurement,
-                    "fields": data
-                }
-            ]
+            json_body = [{"measurement": measurement, "fields": data}]
             self.influxdb_client.write_points(json_body)
         except Exception as e:
             from logger import GRWLogger
+
             logger = GRWLogger()
             logger.log_error(f"Error writing to InfluxDB: {e}")
 
@@ -46,18 +44,21 @@ class InfluxDBWriter:
         json_body = []
 
         for sensor_name, sensor_data in data.items():
-            json_body.append({
-                "measurement": GRWConfig.INFLUXDB_DATABASE,
-                "tags": {
-                    "sensor": sensor_name
-                },
-                "fields": sensor_data,
-                "time": datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
-            })
+            json_body.append(
+                {
+                    "measurement": GRWConfig.INFLUXDB_DATABASE,
+                    "tags": {"sensor": sensor_name},
+                    "fields": sensor_data,
+                    "time": datetime.datetime.now(datetime.timezone.utc).strftime(
+                        "%Y-%m-%dT%H:%M:%SZ"
+                    ),
+                }
+            )
 
-        try:    
+        try:
             self.influxdb_client.write_points(json_body)
         except Exception as e:
             from logger import GRWLogger
+
             logger = GRWLogger()
             logger.log_error(f"Error writing full_dump to InfluxDB: {e}")

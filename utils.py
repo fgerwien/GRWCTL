@@ -1,4 +1,5 @@
 import os
+
 from dotenv import load_dotenv
 
 
@@ -7,6 +8,7 @@ def print_config():
     Print the configuration values for debugging purposes.
     """
     from config import GRWConfig, PINConfig
+
     for key, value in GRWConfig.__dict__.items():
         if not key.startswith("__"):
             print(f"{key}: {value}")
