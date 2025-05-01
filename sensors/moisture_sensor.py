@@ -1,3 +1,6 @@
+from RPi import GPIO
+
+
 class MoistureSensor:
     def __init__(self, pin, name):
         # Initialize the moisture sensor here (e.g., GPIO setup)
@@ -14,6 +17,10 @@ class MoistureSensor:
             raise RuntimeError(f"Failed to read moisture sensor data: {e}")
 
     def _read_moisture(self):
-        # Placeholder for actual moisture reading logic
-        # This should return the moisture level as a float or int
-        return {"moisture": True}  # Replace with actual reading logic
+        GPIO.setmode(GPIO.BCM)
+        GPIO.setup(self.pin, GPIO.IN)
+        needs_water = GPIO.input(self.pin)
+
+        GPIO.cleanup()  # Clean up GPIO settings after reading
+
+        return {"moisture": not needs_water}

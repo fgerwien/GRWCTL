@@ -16,6 +16,7 @@ class GRWConfig:
     INFLUXDB_DATABASE = os.getenv("INFLUXDB_DATABASE", "grwctl_db")
     INFLUXDB_USER = os.getenv("INFLUXDB_USER", "user")
     INFLUXDB_PASSWORD = os.getenv("INFLUXDB_PASSWORD", "password")
+    INFLUXDB_RETENTION_POLICY = os.getenv("INFLUXDB_RETENTION_POLICY", "26w")
 
     # Logging settings
     LOG_LEVEL = os.getenv("LOG_LEVEL", "DEBUG" if DEBUG else "INFO")

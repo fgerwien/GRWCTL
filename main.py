@@ -6,7 +6,6 @@ from logger import GRWLogger
 from sensors.bme280_sensor import BME280Sensor
 from sensors.dht22_sensor import DHT22Sensor
 from sensors.moisture_sensor import MoistureSensor
-from utils import load_envconfig
 
 logger = GRWLogger()
 
