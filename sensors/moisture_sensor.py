@@ -1,11 +1,9 @@
 from RPi import GPIO
 
+from sensors.base import SensorBase
 
-class MoistureSensor:
-    def __init__(self, pin, name):
-        # Initialize the moisture sensor here (e.g., GPIO setup)
-        self.pin = pin
-        self.name = name
+
+class MoistureSensor(SensorBase):
 
     def read_data(self):
         try:

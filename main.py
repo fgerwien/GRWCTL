@@ -47,7 +47,7 @@ def main():
         moisture_sensor,
     ]  # List of all sensors
 
-    # influx_writer = InfluxDBWriter()
+    influx_writer = InfluxDBWriter()
     logger.log_info("Starting sensor data collection...")
     while True:
         try:
@@ -58,7 +58,7 @@ def main():
                     data[sensor.name] = sensor_data
 
             # Write data to InfluxDB
-            # influx_writer.full_dump(data)
+            influx_writer.full_dump(data)
 
             logger.log_debug(f"Data written to InfluxDB: {data}")
 
