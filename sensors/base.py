@@ -29,7 +29,7 @@ class SensorBase:
                 if self.old_values[key] is None:
                     self.old_values[key] = value
                     continue
-                if self.old_values[key] * self.threshold < value:
+                if (self.old_values[key] * self.threshold) < value:
                     self.old_values[key] = value
                     return True
                 else:

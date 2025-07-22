@@ -12,7 +12,7 @@ class GRWConfig:
 
     # Database settings
     INFLUXDB_HOST = os.getenv("INFLUXDB_HOST", "localhost")
-    INFLUXDB_PORT = int(os.getenv("INFLUXDB_PORT", 5432))
+    INFLUXDB_PORT = int(os.getenv("INFLUXDB_PORT", 8086))
     INFLUXDB_DATABASE = os.getenv("INFLUXDB_DATABASE", "grwctl_db")
     INFLUXDB_USER = os.getenv("INFLUXDB_USER", "user")
     INFLUXDB_PASSWORD = os.getenv("INFLUXDB_PASSWORD", "password")
