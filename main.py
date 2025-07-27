@@ -14,7 +14,7 @@ def read_sensor(sensor):
     """Read data from the given sensor and handle errors."""
     try:
         sensor_data = sensor.read_data()
-        if "error" in sensor_data:
+        if sensor_data and sensor_data.get("error"):
             logger.log_error(
                 f"Error reading {sensor.__class__.__name__}: {sensor_data['error']}"
             )

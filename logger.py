@@ -1,5 +1,7 @@
 import datetime
 
+import pytz
+
 from config import GRWConfig
 
 
@@ -8,9 +10,8 @@ class GRWLogger:
         self.logfile = logfile
 
     def _log(self, status, message):
-        timestamp = datetime.datetime.now(datetime.timezone.utc).strftime(
-            "%Y-%m-%dT%H:%M:%SZ"
-        )
+        timezone = pytz.timezone("Europe/Berlin")
+        timestamp = datetime.datetime.now(timezone).strftime("%Y-%m-%dT%H:%M:%SZ")
         logmessage = f"{timestamp} {status}: {message}"
 
         if GRWConfig.DEBUG or GRWConfig.LOG_LEVEL == "DEBUG":
