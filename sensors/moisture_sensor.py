@@ -1,9 +1,13 @@
-from RPi import GPIO
+from gpiozero import DigitalInputDevice
 
 from sensors.base import SensorBase
 
 
 class MoistureSensor(SensorBase):
+
+    def __init__(self, pin, name):
+        super().__init__(pin, name)
+        self.sensor = DigitalInputDevice(pin, pull_up=False)
 
     def read_data(self):
         try:
@@ -15,10 +19,4 @@ class MoistureSensor(SensorBase):
             raise RuntimeError(f"Failed to read moisture sensor data: {e}")
 
     def _read_moisture(self):
-        GPIO.setmode(GPIO.BCM)
-        GPIO.setup(self.pin, GPIO.IN)
-        needs_water = GPIO.input(self.pin)
-
-        GPIO.cleanup()  # Clean up GPIO settings after reading
-
-        return {"moisture": not needs_water}
+        return {"moisture": not self.sensor.is_active}

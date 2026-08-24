@@ -1,5 +1,4 @@
 import board
-import busio
 from adafruit_bme280 import basic as adafruit_bme280
 
 from logger import GRWLogger
@@ -9,8 +8,7 @@ from sensors.base import SensorBase
 class BME280Sensor(SensorBase):
     def __init__(self, address=0x76, name="BME280"):
         super().__init__(address, name)
-        # Initialize I2C bus and BME280 sensor
-        self.i2c = busio.I2C(board.SCL, board.SDA, frequency=100000)
+        self.i2c = board.I2C()
         self.sensor = adafruit_bme280.Adafruit_BME280_I2C(self.i2c, address=self.pin)
         self.rounding = 2
         self.logger = GRWLogger()

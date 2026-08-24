@@ -35,6 +35,10 @@ GRWCTL
    pip install -r requirements.txt
    ```
 
+   On Raspberry Pi OS Bookworm and newer, install into a virtual environment. The
+   `gpiozero` and `lgpio` packages provide the modern GPIO backend, including Pi 5
+   support.
+
 3. (Optional) Install the package:
    ```
    python setup.py install
@@ -50,6 +54,16 @@ GRWCTL
    ```
 
 The script will start reading data from the sensors in a specific interval and log any errors encountered during the process.
+
+## Sensor notes
+
+- The BME280 uses the maintained Adafruit CircuitPython driver over I2C.
+- The moisture input uses `gpiozero` with the `lgpio` backend and expects a digital
+   moisture module. An analog moisture probe requires an ADC such as an ADS1115 or
+   MCP3008.
+- DHT22 support remains available for existing hardware, but DHT22 readings are
+   timing-sensitive. For a new installation, an I2C SHT31 or SHT41 is generally a
+   more reliable temperature and humidity choice.
 
 ## Logging
 
