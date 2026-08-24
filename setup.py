@@ -10,8 +10,8 @@ with requirements_path.open() as f:
 setup(
     name="GRWCTL",
     version="0.1.0",
-    author="Your Name",
-    author_email="your.email@example.com",
+    author="Florian Gerwien",
+    author_email="grwctl@web-playground.com",
     description="A project to read sensor data from Raspberry Pi and log it to InfluxDB",
     packages=find_packages(),
     install_requires=requirements,

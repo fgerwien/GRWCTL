@@ -30,10 +30,10 @@ class GRWConfig:
 class PINConfig:
     # GPIO pin configuration
     DHT22_SENSOR1_NAME = os.getenv("DHT22_SENSOR1_NAME", "DHT22 Sensor 1")
-    DHT22_SENSOR1_PIN = int(os.getenv("DHT22_SENSOR1_PIN", 26))
+    DHT22_SENSOR1_PIN = int(os.getenv("DHT22_SENSOR1_PIN", 21))
 
     DHT22_SENSOR2_NAME = os.getenv("DHT22_SENSOR2_NAME", "DHT22 Sensor 2")
-    DHT22_SENSOR2_PIN = int(os.getenv("DHT22_SENSOR2_PIN", 21))
+    DHT22_SENSOR2_PIN = int(os.getenv("DHT22_SENSOR2_PIN", 26))
 
     BME280_SENSOR_NAME = os.getenv("BME280_SENSOR_NAME", "BME280 Sensor")
     BME280_I2C_ADDRESS = int(os.getenv("BME280_I2C_ADDRESS", 0x76), 16)
